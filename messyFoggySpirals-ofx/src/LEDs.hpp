@@ -34,8 +34,14 @@ public:
     float width, height;
     float LEDSpacing;
     
-    vector <LED> leds;
+    ofFbo ledSamplerFbo;
+    vector<glm::ivec2> regionPos;
+    vector<glm::ivec2> regionSize;
+
+    ofShader averageShader;
+    ofPixels ledPixels;
     
+    vector <LED> leds;
     u_int8_t data1[UDP_BUFFER_SIZE];
     u_int8_t data2[UDP_BUFFER_SIZE];
     u_int8_t data3[UDP_BUFFER_SIZE];

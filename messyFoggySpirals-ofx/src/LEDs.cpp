@@ -11,10 +11,16 @@ LEDs::LEDs() {
         leds.push_back(led);
     }
     
+    ledSamplerFbo.allocate(NUM_TOTAL_LEDs, 1, GL_RGBA32F);
+    averageShader.load("averageLED.vert", "averageLED.frag");
+    
+    regionPos.resize(NUM_TOTAL_LEDs);
+    regionSize.resize(NUM_TOTAL_LEDs);
+    
     udpConnection1.Create();
     udpConnection1.Connect("10.52.120.11", 8888);
     udpConnection1.SetNonBlocking(true);
-
+    
     udpConnection2.Create();
     udpConnection2.Connect("10.52.120.12", 8888);
     udpConnection2.SetNonBlocking(true);
@@ -87,7 +93,7 @@ void LEDs::setSize(float _width, float _height) {
     height = _height;
     
     LEDSpacing = width / NUM_TOTAL_LEDs;
-
+    
     ofVec2f center = ofVec2f(systemWidth / 2.0, systemHeight / 2.0);
     ofVec2f startingPoint = ofVec2f(center.x - width / 2.0, center.y + 100);
     
@@ -95,16 +101,26 @@ void LEDs::setSize(float _width, float _height) {
         // from center
         float x = startingPoint.x + width / NUM_TOTAL_LEDs * i + LEDSpacing / 2.0;
         float y = startingPoint.y;
-
+        
         leds[i].set(x, y, LEDSpacing, LEDSpacing);
         leds[i].setSubsection(x, y - 100, LEDSpacing, 100);
+        
+        regionPos[i] = glm::ivec2(
+                                  leds[i].subsectionRect.getLeft(),
+                                  leds[i].subsectionRect.getTop()
+                                  );
+        
+        regionSize[i] = glm::ivec2(
+                                   leds[i].subsectionRect.getWidth(),
+                                   leds[i].subsectionRect.getHeight()
+                                   );
     }
 }
 
 void LEDs::setOceanFbo(ofFbo& oceanFbo) {
-    for (int i = 0; i < NUM_TOTAL_LEDs; i++) {
-        leds[i].setOceanFbo(oceanFbo);
-    }
+    /*for (int i = 0; i < NUM_TOTAL_LEDs; i++) {
+     leds[i].setOceanFbo(oceanFbo);
+     }*/
 }
 
 void LEDs::packTeensyUdp(int whichTeensy, u_int8_t data[]) {
@@ -135,7 +151,7 @@ void LEDs::sendUdp() {
     packTeensyUdp(5, data6);
     packTeensyUdp(6, data7);
     packTeensyUdp(7, data8);
-
+    
     udpConnection1.Send((const char*)data1, sizeof(data1));
     udpConnection2.Send((const char*)data2, sizeof(data2));
     udpConnection3.Send((const char*)data3, sizeof(data3));

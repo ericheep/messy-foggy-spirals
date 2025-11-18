@@ -21,9 +21,7 @@ public:
     void setOceanFbo(ofFbo& oceanFbo);
     
     ofRectangle rect, subsectionRect;
-    ofImage subsection;
     ofColor ledColor, ledTargetColor;
-    ofFbo downsampleFbo;
 };
 
 #endif /* LED_hpp */
