@@ -1,6 +1,6 @@
 //
 //  Footfalls.hpp
-//  waveVagrants
+//  messyFoggySpirals
 //
 
 #ifndef Footfalls_hpp

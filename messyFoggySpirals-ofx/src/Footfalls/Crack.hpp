@@ -1,6 +1,6 @@
 //
 //  Crack.hpp
-//  waveVagrants
+//  messyFoggySpirals
 //
 
 #ifndef Crack_hpp

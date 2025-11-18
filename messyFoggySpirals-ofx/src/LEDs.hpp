@@ -1,6 +1,6 @@
 //
 //  LEDs.hpp
-//  waveVagrants
+//  messyFoggySpirals
 //
 
 #ifndef LEDs_hpp

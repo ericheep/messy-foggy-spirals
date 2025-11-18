@@ -1,6 +1,6 @@
 //
 //  Ocean.cpp
-//  waveVagrants
+//  messyFoggySpirals
 //
 
 #include "Ocean.hpp"

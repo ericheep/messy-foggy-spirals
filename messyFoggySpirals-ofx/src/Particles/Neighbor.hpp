@@ -1,6 +1,6 @@
 //
 //  Neighbor.hpp
-//  waveVagrants
+//  messyFoggySpirals
 //
 
 #ifndef Neighbor_hpp

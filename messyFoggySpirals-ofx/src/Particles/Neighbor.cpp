@@ -1,6 +1,6 @@
 //
 //  Neighbor.cpp
-//  waveVagrants
+//  messyFoggySpirals
 //
 
 #include "Neighbor.hpp"

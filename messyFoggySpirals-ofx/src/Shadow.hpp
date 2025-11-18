@@ -1,6 +1,6 @@
 //
 //  Shadow.hpp
-//  waveVagrants
+//  messyFoggySpirals
 //
 
 #ifndef Shadow_hpp

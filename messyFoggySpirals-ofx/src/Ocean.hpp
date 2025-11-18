@@ -1,6 +1,6 @@
 //
 //  Ocean.hpp
-//  waveVagrants
+//  messyFoggySpirals
 //
 
 #ifndef Ocean_hpp
