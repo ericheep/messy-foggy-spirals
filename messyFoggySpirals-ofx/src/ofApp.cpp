@@ -52,7 +52,7 @@ void ofApp::setupGui() {
     guiActive = false;
     
     // main gui setup
-    gui.setup("wave vagrants");
+    gui.setup("m/f spirals");
     gui.setSize(140, 12);
     gui.setDefaultWidth(120);
     gui.setDefaultHeight(12);
@@ -69,17 +69,16 @@ void ofApp::setupGui() {
     gui.add(ocean.velocityCurve.set("velocity curve", 1.0, 0.0, 3.0));
     gui.add(ocean.minVelocity.set("min velocity", 0.0, 0.0, 100.0));
     gui.add(ocean.maxVelocity.set("max velocity", 50.0, 0.0, 250.0));
-    gui.add(ocean.minSize.set("min size", 1.0, 0.0, 50.0));
-    gui.add(ocean.maxSize.set("max size", 25.0, 0.0, 100.0));
+    gui.add(ocean.minSize.set("min size", 1.0, 0.0, 25.0));
+    gui.add(ocean.maxSize.set("max size", 15.0, 0.0, 25.0));
     
-    colors.setup("wave vagrants");
+    colors.setup("colors");
     colors.setSize(140, 12);
-    colors.setPosition(ofGetWidth() - 150, 10);
+    colors.setPosition(10, 225);
     colors.setDefaultWidth(120);
     colors.setDefaultHeight(12);
     colors.add(ocean.hotColor.setup(ofColor::pink, 120, 12));
     colors.add(ocean.coolColor.setup(ofColor::red, 120, 12));
-    // colors.add(ocean.coolColor.setup(ofColor(255, 178, 129), 120, 12));
     
     simulationSettings.setName("sim settings");
     simulationSettings.add(ocean.targetDensity.set("density", 1.0, 0.125, 3.0));

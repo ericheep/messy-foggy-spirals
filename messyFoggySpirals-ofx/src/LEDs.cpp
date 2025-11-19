@@ -12,10 +12,9 @@ LEDs::LEDs() {
     }
     
     ledSamplerFbo.allocate(NUM_TOTAL_LEDs, 1, GL_RGBA32F);
-    averageShader.load("averageLED.vert", "averageLED.frag");
+    averageShader.load("shaders/averageLED");
     
     regionPos.resize(NUM_TOTAL_LEDs);
-    regionSize.resize(NUM_TOTAL_LEDs);
     
     udpConnection1.Create();
     udpConnection1.Connect("10.52.120.11", 8888);
@@ -110,17 +109,46 @@ void LEDs::setSize(float _width, float _height) {
                                   leds[i].subsectionRect.getTop()
                                   );
         
-        regionSize[i] = glm::ivec2(
-                                   leds[i].subsectionRect.getWidth(),
-                                   leds[i].subsectionRect.getHeight()
-                                   );
+        cout
+            << i
+            << " "
+            << leds[i].subsectionRect.getLeft()
+            << " "
+            << leds[i].subsectionRect.getTop()
+            << " "
+            << leds[0].subsectionRect.getWidth()
+            << " "
+            << leds[0].subsectionRect.getHeight()
+            <<
+        endl;
     }
+    
+    regionSize = glm::ivec2(
+                            leds[0].subsectionRect.getWidth(),
+                            leds[0].subsectionRect.getHeight()
+                            );
 }
 
 void LEDs::setOceanFbo(ofFbo& oceanFbo) {
-    /*for (int i = 0; i < NUM_TOTAL_LEDs; i++) {
-     leds[i].setOceanFbo(oceanFbo);
-     }*/
+    ledSamplerFbo.begin();
+    averageShader.begin();
+    
+    averageShader.setUniformTexture("sourceTex", oceanFbo.getTexture(), 0);
+    averageShader.setUniform2iv("regionPos", (int*)&regionPos[0], NUM_TOTAL_LEDs);
+    averageShader.setUniform2i("regionSize", regionSize.x, regionSize.y);
+    
+    // Render a 648x1 strip
+    ofDrawRectangle(-1, 0, NUM_TOTAL_LEDs + 2, 1);
+    
+    averageShader.end();
+    ledSamplerFbo.end();
+    
+    // Read all LED colors in one go
+    ledSamplerFbo.readToPixels(ledPixels);
+    
+    for (int i = 0; i < NUM_TOTAL_LEDs; i++) {
+        leds[i].ledTargetColor = ledPixels.getColor(i, 0);
+    }
 }
 
 void LEDs::packTeensyUdp(int whichTeensy, u_int8_t data[]) {

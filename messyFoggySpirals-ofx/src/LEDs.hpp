@@ -9,7 +9,6 @@
 #include <stdio.h>
 #include "ofMain.h"
 #include "LED.hpp"
-#include "ofxOsc.h"
 #include "ofxNetwork.h"
 
 #define NUM_TEENSY_LEDs 81
@@ -36,7 +35,7 @@ public:
     
     ofFbo ledSamplerFbo;
     vector<glm::ivec2> regionPos;
-    vector<glm::ivec2> regionSize;
+    glm::ivec2 regionSize;
 
     ofShader averageShader;
     ofPixels ledPixels;
