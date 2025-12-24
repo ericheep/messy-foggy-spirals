@@ -6,10 +6,13 @@
 #include "LED.hpp"
 
 LED::LED() {
+    ledColor = ofColor::black;
+    ledTargetColor = ofColor::black;
+    maxColor = ofColor::black;
 }
 
 void LED::update() {
-    ledColor.lerp(ledTargetColor, 0.3);
+    ledColor.lerp(ledTargetColor, 0.9);
 }
 
 void LED::draw() {

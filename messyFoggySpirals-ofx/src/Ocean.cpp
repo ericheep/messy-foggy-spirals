@@ -122,6 +122,19 @@ void Ocean::setSize(float _width, float _height) {
     fluidSystem.setBounds(ofVec2f(center.x - halfWidth, center.x + halfWidth), ofVec2f(center.y - halfHeight, center.y + halfHeight));
 }
 
+void Ocean::setRectangle(float _x, float _y, float _width, float  _height) {
+    width = _width;
+    height = _height;
+    systemWidth = width;
+    systemHeight = height;
+    
+    fluidSystem.setWidth(width);
+    fluidSystem.setHeight(height);
+    fluidSystem.setBoundsSize(ofVec3f(width, height, 0));
+    
+    fluidSystem.setBounds(ofVec2f(_x, _x + width), ofVec2f(_y, _y + height));
+}
+
 void Ocean::setDrawMode(int & drawMode) {
     // 0 = circles
     // 1 = rectangles
@@ -134,14 +147,6 @@ void Ocean::setDrawMode(int & drawMode) {
 
 void Ocean::setNumberParticles(int & numberParticles) {
     fluidSystem.setNumberParticles(numberParticles);
-}
-
-void Ocean::setHotColor(ofColor hotColor) {
-    fluidSystem.setHotColor(hotColor);
-}
-
-void Ocean::setCoolColor(ofColor coolColor) {
-    fluidSystem.setCoolColor(coolColor);
 }
 
 void Ocean::setTimeScalar(float& timeScalar) {
@@ -206,8 +211,18 @@ void Ocean::checkFootfalls(Footfalls& footfalls) {
             ofRectangle rect = footfalls.footfalls[i].rect;
             
             float x = rect.x + rect.width / 2.0;
-            float y = systemHeight / 2.0;
-            setPresence(i, x, y, rect.width, 100);
+            float y = 385;
+            setPresence(i, x, y, rect.width, 150);
         }
     }
+}
+
+void Ocean::setHotColor(ofColor _hotColor) {
+    hotColor = _hotColor;
+    fluidSystem.setHotColor(hotColor);
+}
+
+void Ocean::setCoolColor(ofColor _coolColor) {
+    coolColor = _coolColor;
+    fluidSystem.setCoolColor(coolColor);
 }

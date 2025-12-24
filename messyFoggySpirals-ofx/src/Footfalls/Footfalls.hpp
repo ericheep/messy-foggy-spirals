@@ -20,10 +20,13 @@ public:
     void setSystemSize(float width, float height);
     void setOceanSize(float width, float height);
     void setSize(float width, float height);
+    void setRectangle(float x, float y, float width, float height);
+    
     void setAlpha(float alpha);
     void setMovement(float movement);
     void setFill(int index, ofColor fillColor);
     void setNoFill(int index);
+    void clear();
     
     void setPrimaryColor(ofColor primaryColor);
     void setSecondaryColor(ofColor secondaryColor);

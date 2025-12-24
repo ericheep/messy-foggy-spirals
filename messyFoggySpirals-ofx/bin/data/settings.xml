@@ -98,3 +98,21 @@
 	</sim_settings>
 	<UnknownName>249, 241, 255, 255</UnknownName>
 </wave_vagrants>
+<m_f_spirals>
+	<number>100</number>
+	<influence_radius>10</influence_radius>
+	<time_scalar>1</time_scalar>
+	<gravity_multiplier>0</gravity_multiplier>
+	<connection_radius>0</connection_radius>
+	<draw_mode>0</draw_mode>
+	<velocity_curve>1</velocity_curve>
+	<min_velocity>0</min_velocity>
+	<max_velocity>50</max_velocity>
+	<min_size>1</min_size>
+	<max_size>15</max_size>
+	<sim_settings>
+		<density>1</density>
+		<pressure>100</pressure>
+		<near_pressure>100</near_pressure>
+	</sim_settings>
+</m_f_spirals>

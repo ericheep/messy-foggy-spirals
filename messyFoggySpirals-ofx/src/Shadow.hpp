@@ -15,6 +15,7 @@ public:
     void update();
     void draw();
     void set(float y, float width, float height);
+    void setRectangle(float x, float y, float width, float height);
     void setShadowActive(int state);
     ofRectangle rect;
     

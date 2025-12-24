@@ -70,6 +70,8 @@ LEDs::LEDs() {
 
 void LEDs::update() {
     for (int i = 0; i < NUM_TOTAL_LEDs; i++) {
+        leds[i].ledTargetColor = leds[i].maxColor + leds[i].oceanColor;
+
         leds[i].update();
     }
     
@@ -80,6 +82,51 @@ void LEDs::draw() {
     for (int i = 0; i < NUM_TOTAL_LEDs; i++) {
         leds[i].draw();
     }
+}
+
+void LEDs::setLed(int whichBrick, int whichLed, int r, int g, int b) {
+    int index = whichBrick - 1;
+    int offset = index * 27;
+    int ledIndex = offset + whichLed;
+    leds[ledIndex].maxColor = ofColor(r, g, b);
+}
+
+void LEDs::setRectangle(float _x, float _y, float _width, float _height) {
+    width = _width;
+    height = _height;
+    
+    LEDSpacing = width / NUM_TOTAL_LEDs;
+        
+    for (int i = 0; i < NUM_TOTAL_LEDs; i++) {
+        float x = _x + LEDSpacing * i + LEDSpacing / 2.0;
+        float y = _y;
+        
+        leds[i].set(x, y + 25, LEDSpacing, LEDSpacing * 4);
+        leds[i].setSubsection(x, y - 75, LEDSpacing, 150);
+        
+        regionPos[i] = glm::ivec2(
+                                  leds[i].subsectionRect.getLeft(),
+                                  leds[i].subsectionRect.getTop()
+                                  );
+        
+        /*cout
+            << i
+            << " "
+            << leds[i].subsectionRect.getLeft()
+            << " "
+            << leds[i].subsectionRect.getTop()
+            << " "
+            << leds[0].subsectionRect.getWidth()
+            << " "
+            << leds[0].subsectionRect.getHeight()
+            <<
+        endl;*/
+    }
+    
+    regionSize = glm::ivec2(
+                            leds[0].subsectionRect.getWidth(),
+                            leds[0].subsectionRect.getHeight()
+                            );
 }
 
 void LEDs::setSystemSize(float _width, float _height) {
@@ -109,7 +156,7 @@ void LEDs::setSize(float _width, float _height) {
                                   leds[i].subsectionRect.getTop()
                                   );
         
-        cout
+        /*cout
             << i
             << " "
             << leds[i].subsectionRect.getLeft()
@@ -120,7 +167,7 @@ void LEDs::setSize(float _width, float _height) {
             << " "
             << leds[0].subsectionRect.getHeight()
             <<
-        endl;
+        endl;*/
     }
     
     regionSize = glm::ivec2(
@@ -147,7 +194,7 @@ void LEDs::setOceanFbo(ofFbo& oceanFbo) {
     ledSamplerFbo.readToPixels(ledPixels);
     
     for (int i = 0; i < NUM_TOTAL_LEDs; i++) {
-        leds[i].ledTargetColor = ledPixels.getColor(i, 0);
+        leds[i].oceanColor = ledPixels.getColor(i, 0);
     }
 }
 

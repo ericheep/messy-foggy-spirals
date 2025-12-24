@@ -5,9 +5,10 @@
 
 #include "Crack.hpp"
 
-Crack::Crack(float _x, float _y, float _width, float _height, float _footfallTimer, float oceanWidth, float _alpha, ofColor primaryColor, ofColor secondaryColor) {
-    primaryColor = ofColor::white;
-    secondaryColor = ofColor::peachPuff;
+Crack::Crack(float _x, float _y, float _width, float _height, float _footfallTimer, float oceanWidth, float _alpha, ofColor _primaryColor, ofColor _secondaryColor) {
+    
+    primaryColor = _primaryColor;
+    secondaryColor = _secondaryColor;
     crackWidth = 0.0;
     targetCrackWidth = _width;
     totalLifetime = ofRandom(1.5, 2.0);

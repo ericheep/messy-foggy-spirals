@@ -110,13 +110,13 @@ void Footfall::setLightFoolfallActive(int state) {
 void Footfall::addCrack() {
     float w = rect.width * scalarWidth;
     
-    cracks.push_back(Crack(rect.x + rect.width / 2.0, ofGetHeight() / 2.0, w, oceanHeight, footfallTimer, oceanWidth, alpha, primaryColor, secondaryColor));
+    cracks.push_back(Crack(rect.x + rect.width / 2.0, y + oceanHeight / 2.0 + 30, w, oceanHeight, footfallTimer, oceanWidth, alpha, primaryColor, secondaryColor));
 }
 
 void Footfall::addSliver() {
     float w = rect.width * scalarWidth;
 
-    slivers.push_back(Sliver(rect.x + rect.width / 2.0, ofGetHeight() / 2.0, w, oceanHeight, footfallTimer, oceanWidth, alpha, primaryColor, secondaryColor));
+    slivers.push_back(Sliver(rect.x + rect.width / 2.0, y + oceanHeight / 2.0 + 30, w, oceanHeight, footfallTimer, oceanWidth, alpha, primaryColor, secondaryColor));
 }
 
 void Footfall::update(float lastFrameTime) {
@@ -176,6 +176,7 @@ void Footfall::update(float lastFrameTime) {
 
 void Footfall::draw() {
     ofSetColor(ofColor::white);
+    ofNoFill();
     
     if (isActive) {
         ofFill();
@@ -184,12 +185,12 @@ void Footfall::draw() {
     }
     
     if (isFillActive) {
-        ofFill();
+        // ofFill();
     }
     
     ofDrawRectangle(buttonRect);
     
-    ofFill();
+    // ofFill();
     for (auto& sliver : slivers) {
         sliver.draw();
     }
@@ -197,11 +198,10 @@ void Footfall::draw() {
     for (auto& crack : cracks) {
         crack.draw();
     }
-    
-    
 }
 
-void Footfall::set(float x, float y, float width, float height) {
+void Footfall::set(float x, float _y, float width, float height) {
+    y = _y;
     rect.setFromCenter(x, y, width, height);
     buttonRect.setFromCenter(x, y, width, height);
 }

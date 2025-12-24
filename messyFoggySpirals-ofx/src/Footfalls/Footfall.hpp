@@ -49,6 +49,7 @@ public:
     float scalarWidth;
     float movement;
     int direction;
+    float y;
     
     vector<Sliver> slivers;
     vector<Crack> cracks;

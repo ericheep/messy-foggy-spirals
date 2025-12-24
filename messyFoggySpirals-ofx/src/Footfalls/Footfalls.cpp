@@ -6,7 +6,7 @@
 #include "Footfalls.hpp"
 
 Footfalls::Footfalls() {
-    numFootfalls = 9;
+    numFootfalls = 24;
     footfallHeight = 20;
     
     for (int i = 0; i < numFootfalls; i++) {
@@ -34,15 +34,15 @@ void Footfalls::setSystemSize(float _width, float _height) {
 
 void Footfalls::setPrimaryColor(ofColor _primaryColor) {
     primaryColor = _primaryColor;
-    for (auto& footfall : footfalls) {
-        footfall.setPrimaryColor(primaryColor);
+    for (int i = 0; i < footfalls.size(); i++) {
+        footfalls[i].setPrimaryColor(primaryColor);
     }
 }
 
 void Footfalls::setSecondaryColor(ofColor _secondaryColor) {
     secondaryColor = _secondaryColor;
-    for (auto& footfall : footfalls) {
-        footfall.setSecondaryColor(secondaryColor);
+    for (int i = 0; i < footfalls.size(); i++) {
+        footfalls[i].setSecondaryColor(secondaryColor);
     }
 }
 
@@ -68,7 +68,7 @@ void Footfalls::setSize(float _width, float _height) {
     footfallWidth = width / numFootfalls;
     
     ofVec2f center = ofVec2f(systemWidth / 2.0, systemHeight / 2.0);
-    ofVec2f startingPoint = ofVec2f(center.x - width / 2.0, center.y - 100);
+    ofVec2f startingPoint = ofVec2f(center.x - width / 2.0, center.y - 150);
     
     for (int i = 0; i < numFootfalls; i++) {
         // from center
@@ -76,6 +76,16 @@ void Footfalls::setSize(float _width, float _height) {
         float y = startingPoint.y;
         
         footfalls[i].set(x, y, footfallWidth, footfallHeight);
+    }
+}
+
+void Footfalls::setRectangle(float _x, float _y, float _width, float  _height) {
+    setOceanSize(_width, _height);
+    footfallWidth = _width / numFootfalls;
+        
+    for (int i = 0; i < numFootfalls; i++) {
+        float x = _x + footfallWidth * i + footfallWidth / 2.0;
+        footfalls[i].set(x, _y, footfallWidth, footfallHeight);
     }
 }
 
@@ -94,6 +104,8 @@ void Footfalls::update() {
 
     for (int i = 0; i < numFootfalls; i++) {
         footfalls[i].update(lastFrameTime);
+        footfalls[i].setPrimaryColor(primaryColor);
+        footfalls[i].setSecondaryColor(secondaryColor);
         footfalls[i].setScalarWidth(scalarWidth);
         footfalls[i].setMovement(movement);
     }
@@ -105,6 +117,12 @@ void Footfalls::setFootfallActive(int index, int state, float _scalarWidth) {
     footfalls[index].setFootfallActive(state);
     footfalls[index].setScalarWidth(scalarWidth);
 
+}
+
+void Footfalls::clear() {
+    for (int i = 0; i < footfalls.size(); i++) {
+        footfalls[i].setFootfallActive(false);
+    }
 }
 
 void Footfalls::setLightFootfallActive(int index, int state, float _scalarWidth) {

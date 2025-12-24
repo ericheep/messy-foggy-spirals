@@ -5,11 +5,11 @@
 #include "QNEthernet.h"
 using namespace qindesign::network;
 
-#define TEENSY_IP 10, 52, 120, 18
+#define TEENSY_IP 10, 52, 120, 17
 #define TEENSY_DDNS 10, 52, 120, 1
 #define TEENSY_SUBNET 255, 255, 255, 0
 #define TEENSY_PORT 8888
-byte mac[] = { 0x04, 0xe9, 0xe5, 0x1c, 0x84, 001 };
+byte mac[] = { 0x04, 0xe9, 0xe5, 0x1c, 0x84, 0x1d };
 
 #define DATA_PIN_1 10
 #define DATA_PIN_2 12
@@ -137,9 +137,9 @@ void parseUdpData() {
 
   led = 0;
   for (uint8_t i = 0; i < NUM_LEDS * 3; i += 3) {
-    uint8_t r = udpBuffer[2 + i + NUM_LEDS];
-    uint8_t g = udpBuffer[2 + i + NUM_LEDS + 1];
-    uint8_t b = udpBuffer[2 + i + NUM_LEDS + 2];
+    uint8_t r = udpBuffer[2 + i + (NUM_LEDS * 3)];
+    uint8_t g = udpBuffer[2 + i + (NUM_LEDS * 3) + 1];
+    uint8_t b = udpBuffer[2 + i + (NUM_LEDS * 3) + 2];
 
     leds2[led] = CRGB(r, g, b);
     led++;
@@ -147,9 +147,9 @@ void parseUdpData() {
 
   led = 0;
   for (uint8_t i = 0; i < NUM_LEDS * 3; i += 3) {
-    uint8_t r = udpBuffer[2 + i + NUM_LEDS * 2];
-    uint8_t g = udpBuffer[2 + i + NUM_LEDS * 2 + 1];
-    uint8_t b = udpBuffer[2 + i + NUM_LEDS * 2 + 2];
+    uint8_t r = udpBuffer[2 + i + (NUM_LEDS * 3) * 2];
+    uint8_t g = udpBuffer[2 + i + (NUM_LEDS * 3) * 2 + 1];
+    uint8_t b = udpBuffer[2 + i + (NUM_LEDS * 3) * 2 + 2];
 
     leds3[led] = CRGB(r, g, b);
     led++;

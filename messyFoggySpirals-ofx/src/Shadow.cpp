@@ -11,12 +11,23 @@ Shadow::Shadow() {
 void Shadow::set(float y, float width, float height) {
     oceanWidth = width;
     oceanHeight = height;
-    rect.setFromCenter(0, y, width / 4.0, height);
+    rect.setFromCenter(0, y + height / 2.0, width / 4.0, height);
     
     switchDirection = false;
     
     startX = ofGetWidth() / 2.0 - oceanWidth / 2.0 - rect.width;
     endX = ofGetWidth() / 2.0 + oceanWidth / 2.0 + rect.width / 2.0;
+}
+
+void Shadow::setRectangle(float x, float y, float width, float height) {
+    oceanWidth = width;
+    oceanHeight = height;
+    rect.setFromCenter(0, y + height / 2.0, width / 4.0, height);
+    
+    switchDirection = false;
+    
+    startX = x - width / 4.0;
+    endX = x + width + width / 4.0;
 }
 
 void Shadow::update() {
@@ -50,6 +61,7 @@ void Shadow::setShadowActive(int state) {
 
 void Shadow::draw() {
     if (isActive) {
+        ofFill();
         ofSetColor(ofColor::black);
         ofDrawRectangle(rect);
     }

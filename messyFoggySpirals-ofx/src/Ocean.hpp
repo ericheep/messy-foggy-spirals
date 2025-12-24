@@ -21,6 +21,7 @@ public:
     void draw();
     void setSize(float width, float height);
     void setSystemSize(float width, float height);
+    void setRectangle(float x, float y, float width, float height);
     void setActive(int state);
         
     FluidSystem2D fluidSystem;
@@ -48,8 +49,8 @@ public:
     ofParameter<float> minSize, maxSize;
     ofParameter<float> connectionRadius;
     
-    ofxColorSlider hotColor, coolColor;
-    
+    ofColor hotColor, coolColor;
+        
     void setDrawMode(int& drawMode);
     void setNumberParticles(int& numberParticles);
     void setTimeScalar(float& timeScalar);

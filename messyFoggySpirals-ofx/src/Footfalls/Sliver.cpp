@@ -21,7 +21,7 @@ Sliver::Sliver(float _x, float _y, float _width, float _height, float _footfallT
     } else {
         direction = -1;
     }
-    
+        
     footfallTimer = _footfallTimer;
     isAlive = true;
 }

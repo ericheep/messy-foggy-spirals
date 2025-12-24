@@ -22,6 +22,7 @@ public:
     
     ofRectangle rect, subsectionRect;
     ofColor ledColor, ledTargetColor;
+    ofColor maxColor, oceanColor;
 };
 
 #endif /* LED_hpp */

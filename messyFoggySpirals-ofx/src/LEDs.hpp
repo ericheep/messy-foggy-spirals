@@ -23,6 +23,8 @@ public:
     void draw();
     void sendUdp();
     
+    void setLed(int whichBrick, int whichLed, int r, int g, int b);
+    void setRectangle(float x, float y, float width, float height);
     void setSystemSize(float width, float height);
     void setSize(float width, float height);
     void setOceanFbo(ofFbo& oceanFbo);

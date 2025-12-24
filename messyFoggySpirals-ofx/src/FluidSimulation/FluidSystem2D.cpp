@@ -138,7 +138,7 @@ ofVec2f FluidSystem2D::pushParticlesAwayFromPresence(Presence presence, ofVec2f 
     float pX = presence.x;
     float pY = presence.y;
     float pHeight = presence.blobHeight;
-    float pWidth = presence.blobWidth * 0.65;
+    float pWidth = presence.blobWidth * 2.0;
     
     ofVec2f repellentPoint = ofVec2f(pX, pY);
 
